@@ -84,6 +84,25 @@
     {{ end }}
   {{ end }}
 {{ end }}
-
+{{ with resources.GetRemote "https://script.google.com/macros/s/AKfycbwvpnVoNNkuDA-nwzMm1o7c1mbXoUkuN9sojO29BefxVPyAeDbY9bPWUr9vG6fdkw_Y/exec" }} 
+  {{ with .Content | unmarshal }}
+    {{ range .feed.entry }}
+      {{ $post := dict 
+        "title" .title.tvalue
+      }}
+      //"content" .content
+      {{ $filename := printf "posts/%s.md" (urlize .title.tvalue) }}
+      {{ $file := dict }}
+      {{ if eq $format "json" }}
+        {{ $string := print (jsonify $post) "\n " .content.tvalue }}
+        {{ $file = $string | resources.FromString $filename }}
+      {{ else }}
+        {{ $yaml_template := resources.Get "post.yaml" }}
+        {{ $file = $yaml_template | resources.ExecuteAsTemplate $filename $post }}
+      {{ end }}
+      {{ $output := $file.RelPermalink }}
+    {{ end }}
+  {{ end }}
+{{ end }}
 
 {{ return true }}
