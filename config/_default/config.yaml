@@ -1,0 +1,12 @@
+baseURL: http://localhost:8787
+languageCode: en-us
+title: House Spotting
+paginate: 10
+caches:
+  getresource:
+    maxAge: 0
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <div class="container mx-auto">
+    <div class="md:grid grid-cols-2 gap-8">
+      <div class="max-w-1/4 float-right p-8 md:max-w-none md:float-none md:p-0 md:order-1">
+        {{ $collection := .Params.collection }}
+        {{ $id := .Params.id }}
+        {{ range first 1 .Params.photographs }}
+        <img class="block w-full" src="https://pbasfw.fly.dev/api/files/{{ $collection }}/{{ $id }}/{{ . }}" />
+      {{ end }}
+      </div>
+      <div>
+        <h1 class=" text-4xl ">{{ .Params.title }}</h1>
+        
+        <div>
+          {{ replace .Content "../api/files/" "https://pbasfw.fly.dev/api/files/" | safeHTML }}
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}
