@@ -60,8 +60,8 @@
       {{ $output := $file.RelPermalink }}
     {{ end }}
   {{ end }}
-
 {{ end }}
+
 {{ with resources.GetRemote "https://api.storyblok.com/v2/cdn/stories?cv=1678732755&token=RJvQpsmRou5QBMSTYIebdwtt" }} 
   {{ with .Content | unmarshal }}
     {{ range .stories }}
