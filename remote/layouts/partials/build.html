@@ -84,11 +84,12 @@
     {{ end }}
   {{ end }}
 {{ end }}
-{{ with resources.GetRemote "https://script.google.com/macros/s/AKfycbwvpnVoNNkuDA-nwzMm1o7c1mbXoUkuN9sojO29BefxVPyAeDbY9bPWUr9vG6fdkw_Y/exec" }} 
+{{ with resources.GetRemote "https://script.google.com/macros/s/AKfycbzM4yQjJxeyeQ98SU0kcLHo_ccI_SFPFDZd7v2bFu7paZQ9sWgr_k6fiiU2YtLoGz4w/exec" }} 
   {{ with .Content | unmarshal }}
     {{ range .feed.entry }}
       {{ $post := dict 
         "title" .title.tvalue
+        "heroimg" .mediaThumbnail.url
       }}
       //"content" .content
       {{ $filename := printf "posts/%s.md" (urlize .title.tvalue) }}
