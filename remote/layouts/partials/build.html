@@ -84,7 +84,7 @@
     {{ end }}
   {{ end }}
 {{ end }}
-{{ with resources.GetRemote "https://script.google.com/macros/s/AKfycbzWR1cOfDku0zqjUDPAQLe4S8g2hSdBWnQmliMTDvagB-0eHCu69EHlmZmKUhMRfxyw/exec" }} 
+{{ with resources.GetRemote "https://script.google.com/macros/s/AKfycbx1iGcLLGqSsuhO0oiZuUDEarue6-nnG9paFMlGraFxjEL7q2FzZyHvFPgPHlQq1oGR/exec" }} 
   {{ with .Content | unmarshal }}
     {{ range .feed.entry }}
       {{ $post := dict 
