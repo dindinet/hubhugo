@@ -2,7 +2,14 @@
   <div class="container mx-auto">
     <div class="md:grid grid-cols-2 gap-8">
       <div class="max-w-1/4 float-right p-8 md:max-w-none md:float-none md:p-0 md:order-1">
-        <img class="block w-full" src="{{ .Params.heroimg }}" />
+      {{ if isset .Params "herourl"}}
+        {{ $herourl := .Params.herourl }}
+        {{ range .Params.heroimg }}
+          <img class="block w-full" src="{{ $herourl }}{{ . }}" />
+        {{ end }}
+      {{ else }}
+         <img class="block w-full" src="{{ .Params.heroimg }}" />
+      {{ end }} 
       </div>
       <div>
         <h1 class=" text-4xl ">{{ .Params.title }}</h1>
