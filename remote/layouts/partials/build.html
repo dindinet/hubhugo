@@ -123,7 +123,8 @@
       {{ $filename := printf "posts/%s.md" (urlize .slug) }}
       {{ $file := dict }}
       {{ if eq $format "json" }}
-        {{ $string := print (jsonify $post) "\n " replace .body "../api" "https://pbasfw.fly.dev/api"}}
+        {{ $thebody := replace .body "../api" "https://pbasfw.fly.dev/api" }}
+        {{ $string := print (jsonify $post) "\n " $thebody }}
         {{ $file = $string | resources.FromString $filename }}
       {{ else }}
         {{ $yaml_template := resources.Get "post.yaml" }}
