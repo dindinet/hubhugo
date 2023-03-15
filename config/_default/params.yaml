@@ -1,7 +1,5 @@
 credits: |-
-  Brand font is Museo Moderno by [Omnibus Type](https://www.omnibus-type.com/) licensed under the [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
-
-  Dummy metadata generated using [Dindi](https://www.speedsizeinfluence.com/)
+  Site generated from several data sources by [Dindi](https://www.speedsizeinfluence.com/)
 tnd_styles:
   fonts:
   - family: MuseoModerno
