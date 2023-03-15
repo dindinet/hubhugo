@@ -1,9 +1,13 @@
 <a href="{{ .RelPermalink }}" class="p-4 text-center border-2 shadow-lg">
   <div class="w-40 mx-auto">
-    {{ $herourl := .Params.herourl }}
-    {{ range .Params.heroimg }}
-    <img class="block w-full" src="{{ $herourl }}{{ . }}" />
-    {{ end }}
+   {{ if isset .Params "herourl"}}
+     {{ $herourl := .Params.herourl }}
+     {{ range .Params.heroimg }}
+       <img class="block w-full" src="{{ $herourl }}{{ . }}" />
+     {{ end }}
+   {{ else }}
+      <img class="block w-full" src="{{ .Params.heroimg }}" />
+   {{ end }} 
   </div>
   <div class="mt-4">
     <div class="font-brand font-bold">{{ .Params.title }}</div> 
