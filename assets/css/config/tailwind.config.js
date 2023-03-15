@@ -10,7 +10,7 @@ module.exports = {
         '1/4': '25%',
       },
       fontFamily: {
-        'brand': ['MuseoModerno', 'ui-sans']
+        'brand': ['Verdana','MuseoModerno', 'ui-sans']
       }
     }
   },
