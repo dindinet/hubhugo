@@ -3,10 +3,10 @@
    {{ if isset .Params "herourl"}}
      {{ $herourl := .Params.herourl }}
      {{ range .Params.heroimg }}
-       <img style="width: 160px; height: 100px; object-fit: scale-down;" class="block w-full" src="{{ $herourl }}{{ . }}" />
+       <img style="width: 160px; height: 100px; object-fit: cover;" class="block w-full" src="{{ $herourl }}{{ . }}" />
      {{ end }}
    {{ else }}
-      <img style="width: 160px; height: 100px; object-fit: scale-down;" class="block w-full" src="{{ .Params.heroimg }}" />
+      <img style="width: 160px; height: 100px; object-fit: cover;" class="block w-full" src="{{ .Params.heroimg }}" />
    {{ end }} 
   </div>
   <div class="mt-4">
