@@ -61,7 +61,7 @@
     {{ end }}
   {{ end }}
 {{ end }}
-{{ with resources.GetRemote "https://api.storyblok.com/v2/cdn/stories/?cv=1678981671&token=RJvQpsmRou5QBMSTYIebdwtt&version=published" }} 
+{{ with resources.GetRemote "https://api.storyblok.com/v2/cdn/stories/?token=RJvQpsmRou5QBMSTYIebdwtt&version=published" }} 
   {{ with .Content | unmarshal }}
     {{ range .stories }}
       {{ $post := dict 
