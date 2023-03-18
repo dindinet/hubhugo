@@ -1,5 +1,28 @@
 
 {{ $format := "json" }}
+{{ with resources.GetRemote "https://dindinet.pockethost.io/api/collections/posts/records?perPage=500" }} 
+  {{ with .Content | unmarshal }}
+    {{ range .items }}
+      {{ $post := dict 
+        "slug" .slug
+        "title" .title
+        "heroimg" .heroImg
+        "photos" .jphotos
+      }}
+      //"content" .content
+      {{ $filename := printf "posts/%s.md" (urlize .slug) }}
+      {{ $file := dict }}
+      {{ if eq $format "json" }}
+        {{ $string := print (jsonify $post) "\n " .content }}
+        {{ $file = $string | resources.FromString $filename }}
+      {{ else }}
+        {{ $yaml_template := resources.Get "post.yaml" }}
+        {{ $file = $yaml_template | resources.ExecuteAsTemplate $filename $post }}
+      {{ end }}
+      {{ $output := $file.RelPermalink }}
+    {{ end }}
+  {{ end }}
+{{ end }}
 {{ with resources.GetRemote "https://script.google.com/macros/s/AKfycbwncwx9CHMqh4R2wBQ5dsSBhFcR4hqGbgJv27Q9Hu9UKNk7LYeTjju28lQlTTDSABFVaw/exec" }} 
   {{ with .Content | unmarshal }}
   {{ $categories := slice }}
