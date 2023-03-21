@@ -5,16 +5,16 @@
       {{ if isset .Params "herourl"}}
         {{ $herourl := .Params.herourl }}
         {{ range .Params.heroimg }}
-          <img class="block w-full" src="{{ $herourl }}{{ . }}" />
+          <img id="sbheroimg"  class="block w-full" src="{{ $herourl }}{{ . }}" />
         {{ end }}
       {{ else }}
-         <img class="block w-full" src="{{ .Params.heroimg }}" />
+         <img id="sbheroimg" class="block w-full" src="{{ .Params.heroimg }}" />
       {{ end }} 
       </div>
       <div>
-        <h1 class=" text-4xl ">{{ .Params.title }}</h1>
+        <h1 id="sbtitle" class=" text-4xl ">{{ .Params.title }}</h1>
         
-        <div>
+        <div id="sbcontent">
           {{ .Content }}
         </div>
         <a class="underline text-blue-600" href="../">Back to All Posts</a>
