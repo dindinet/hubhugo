@@ -17,7 +17,7 @@
   <body class="bg-black-200 text-white-600">
     {{ if (isset .Params "storyblok") }}
     <script>
-      if ( window !== window.parent ){
+      if ( window.location !== window.parent.location ) {
         var storyblokscript = document.createElement('script');
         storyblokscript.setAttribute('src','//app.storyblok.com/f/storyblok-v2-latest.js');
         document.body.appendChild(storyblokscript);
