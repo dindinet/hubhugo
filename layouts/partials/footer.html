@@ -8,3 +8,22 @@
     {{ end }}
   </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+<script>
+//const { StoryblokBridge, location } = window
+const storyblokInstance = new StoryblokBridge()
+ 
+//storyblokInstance.on('published', (event) => {
+//    // reload page if save or publish is clicked
+//    location.reload(true)
+//})
+
+storyblokInstance.on('input', (event) => {
+   converter = new showdown.Converter(),
+   html = converter.makeHtml(event.story.content.content);
+   document.getElementById("sbcontent").innerHTML = html
+   document.getElementById("sbheroimg").src = event.story.content.heroImg.url
+   document.getElementById("sbtitle").innerHTML = event.story.content.title
+   console.log(html)
+})
+</script>
