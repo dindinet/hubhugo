@@ -17,6 +17,11 @@ const storyblokInstance = new StoryblokBridge()
 storyblokInstance.on(['published', 'change'], (event) => {
    // do not reload page if save or publish is clicked
    //location.reload()
+   converter = new showdown.Converter(),
+   html = converter.makeHtml(event.story.content.content);
+   document.getElementById("sbcontent").innerHTML = html
+   document.getElementById("sbheroimg").src = event.story.content.heroImg.url
+   document.getElementById("sbtitle").innerHTML = event.story.content.title
 })
 
 storyblokInstance.on('input', (event) => {
