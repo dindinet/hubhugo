@@ -14,21 +14,6 @@
 
 const storyblokInstance = new StoryblokBridge()
  
-storyblokInstance.on(['changed','publish'], (event) => {
-   // do not reload page if save or publish is clicked
-   //location.reload()
-  storyblokInstance.pingEditor(() => {
-  if (storyblokInstance.isInEditor()) {
-    converter = new showdown.Converter(),
-   html = converter.makeHtml(event.story.content.content);
-   document.getElementById("sbcontent").innerHTML = html
-   document.getElementById("sbheroimg").src = event.story.content.heroImg.url
-   document.getElementById("sbtitle").innerHTML = event.story.content.title
-  } 
-})
-
-})
-
 storyblokInstance.on('input', (event) => {
    converter = new showdown.Converter(),
    html = converter.makeHtml(event.story.content.content);
