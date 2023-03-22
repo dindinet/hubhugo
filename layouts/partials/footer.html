@@ -16,7 +16,7 @@ const storyblokInstance = new StoryblokBridge()
  
 storyblokInstance.on(['published', 'change'], (event) => {
    // do not reload page if save or publish is clicked
-   location.reload(false)
+   //location.reload()
 })
 
 storyblokInstance.on('input', (event) => {
