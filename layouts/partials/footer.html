@@ -13,11 +13,10 @@
 //const { StoryblokBridge, location } = window
 const storyblokInstance = new StoryblokBridge()
 
- 
-storyblokInstance.on(['published', 'change'], () => {
-    // reload page if save or publish is clicked
-    location.reload(false)
-})
+//storyblokInstance.on(['published', 'change'], () => {
+//    // reload page if save or publish is clicked
+//    location.reload(false)
+//})
 
 storyblokInstance.on('input', (event) => {
    converter = new showdown.Converter(),
