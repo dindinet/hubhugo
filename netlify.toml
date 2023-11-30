@@ -1,6 +1,6 @@
 [build]
 publish = "public"
-command = "cd remote && hugo && cd .. && hugo"
+command = "hugo"
 
 [build.environment]
   GO_VERSION = "1.20.2"
