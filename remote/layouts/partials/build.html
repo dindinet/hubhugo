@@ -23,44 +23,6 @@
     {{ end }}
   {{ end }}
 {{ end }}
-{{ with resources.GetRemote "https://script.google.com/macros/s/AKfycbwncwx9CHMqh4R2wBQ5dsSBhFcR4hqGbgJv27Q9Hu9UKNk7LYeTjju28lQlTTDSABFVaw/exec" }} 
-  {{ with .Content | unmarshal }}
-  {{ $categories := slice }}
-  {{ $tags := slice }}
-    {{ range .data.posts.nodes }}
-      {{ range .categories.nodes }}
-        {{ $categories = $categories | append .name }}
-      {{ else }}
-      {{ $categories = $categories | append "empty" }}
-      {{ end }}
-      {{ range .tags.nodes }}
-      {{ $tags = $tags | append .name }}
-      {{ else }}
-      {{ $tags = $tags | append "notag" }}
-      {{ end }}
-      {{ $post := dict 
-        "slug" .slug
-        "title" .title
-        "heroimg" .featuredImage.node.sourceUrl
-        "categories" $categories
-        "tags" $tags
-      }}
-      //"content" .content
-      {{ $filename := printf "posts/%s.md" (urlize .slug) }}
-      {{ $file := dict }}
-      {{ if eq $format "json" }}
-        {{ $string := print (jsonify $post) "\n " .content }}
-        {{ $file = $string | resources.FromString $filename }}
-      {{ else }}
-        {{ $yaml_template := resources.Get "post.yaml" }}
-        {{ $file = $yaml_template | resources.ExecuteAsTemplate $filename $post }}
-      {{ end }}
-      {{ $categories = slice }}
-      {{ $tags = slice }}
-      {{ $output := $file.RelPermalink }}
-    {{ end }}
-  {{ end }}
-{{ end }}
 {{ with resources.GetRemote "https://api.storyblok.com/v2/cdn/stories/?token=RJvQpsmRou5QBMSTYIebdwtt&version=published" }} 
   {{ with .Content | unmarshal }}
     {{ range .stories }}
