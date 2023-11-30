@@ -46,54 +46,5 @@
     {{ end }}
   {{ end }}
 {{ end }}
-{{ with resources.GetRemote "https://script.google.com/macros/s/AKfycbx1iGcLLGqSsuhO0oiZuUDEarue6-nnG9paFMlGraFxjEL7q2FzZyHvFPgPHlQq1oGR/exec" }} 
-  {{ with .Content | unmarshal }}
-    {{ range .feed.entry }}
-      {{ $post := dict 
-        "title" .title.tvalue
-        "heroimg" .mediaThumbnail.url
-      }}
-      //"content" .content
-      {{ $filename := printf "posts/%s.md" (urlize .title.tvalue) }}
-      {{ $file := dict }}
-      {{ if eq $format "json" }}
-        {{ $string := print (jsonify $post) "\n " .content.tvalue }}
-        {{ $file = $string | resources.FromString $filename }}
-      {{ else }}
-        {{ $yaml_template := resources.Get "post.yaml" }}
-        {{ $file = $yaml_template | resources.ExecuteAsTemplate $filename $post }}
-      {{ end }}
-      {{ $output := $file.RelPermalink }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-{{ with resources.GetRemote "https://pbasfw.fly.dev/api/collections/posts/records?perPage=500" }} 
-  {{ with .Content | unmarshal }}
-    {{ range .items }}
-     {{ $heroImg := first 1 .photographs }}
-     {{ $collectionurl := printf "https://pbasfw.fly.dev/api/files/%s/%s/" .collectionId .id }}
 
-      {{ $post := dict 
-        "title" .title
-        "photos" .photographs
-        "heroimg" $heroImg
-        "collectionId" .collectionId
-        "id" .id
-        "herourl" $collectionurl
-      }}
-      //"content" .content
-      {{ $filename := printf "posts/%s.md" (urlize .slug) }}
-      {{ $file := dict }}
-      {{ if eq $format "json" }}
-        {{ $thebody := replace .body "../api" "https://pbasfw.fly.dev/api" }}
-        {{ $string := print (jsonify $post) "\n " $thebody }}
-        {{ $file = $string | resources.FromString $filename }}
-      {{ else }}
-        {{ $yaml_template := resources.Get "post.yaml" }}
-        {{ $file = $yaml_template | resources.ExecuteAsTemplate $filename $post }}
-      {{ end }}
-      {{ $output := $file.RelPermalink }}
-    {{ end }}
-  {{ end }}
-{{ end }}
 {{ return true }}
