@@ -1,4 +1,3 @@
-https://
 [[module.imports]]
     path = "github.com/dindinet/primo-startup-vercel"
     disabled = false
