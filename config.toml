@@ -1,0 +1,8 @@
+https://
+[[module.imports]]
+    path = "github.com/dindinet/primo-startup-vercel"
+    disabled = false
+
+    [[module.imports.mounts]]
+    source = "/"
+    target = "static/"
