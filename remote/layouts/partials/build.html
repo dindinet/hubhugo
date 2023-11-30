@@ -23,28 +23,6 @@
     {{ end }}
   {{ end }}
 {{ end }}
-{{ with resources.GetRemote "https://api.storyblok.com/v2/cdn/stories/?token=RJvQpsmRou5QBMSTYIebdwtt&version=published" }} 
-  {{ with .Content | unmarshal }}
-    {{ range .stories }}
-      {{ $post := dict 
-        "slug" .content.slug
-        "title" .content.title
-        "heroimg" .content.heroImg.url
-        "storyblok" "true"
-      }}
-      //"content" .content.content
-      {{ $filename := printf "posts/%s.md" (urlize .content.slug) }}
-      {{ $file := dict }}
-      {{ if eq $format "json" }}
-        {{ $string := print (jsonify $post) "\n " .content.content }}
-        {{ $file = $string | resources.FromString $filename }}
-      {{ else }}
-        {{ $yaml_template := resources.Get "post.yaml" }}
-        {{ $file = $yaml_template | resources.ExecuteAsTemplate $filename $post }}
-      {{ end }}
-      {{ $output := $file.RelPermalink }}
-    {{ end }}
-  {{ end }}
-{{ end }}
+
 
 {{ return true }}
